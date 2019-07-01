@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.spring.infrastructure.mybatis.mapper.UserAuthMapper">
+    <insert id="insert">
+        insert into userAuth (userId, authKey) values(
+        #{auth.userId},
+        #{auth.authKey}
+        )
+    </insert>
+
+    <select id="findById" resultMap="auth">
+        select * from userAuth where userId = #{userId}
+    </select>
+
+    <delete id="deleteEntries">
+        delete from userAuth where userId = #{userId}
+    </delete>
+
+    <resultMap id="auth" type="io.spring.core.auth.Auth" >
+        <id column="userId" property="userId"/>
+        <result column="authKey" property="authKey"/>
+    </resultMap>
+</mapper>
